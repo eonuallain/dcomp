@@ -20,3 +20,6 @@ Comment out last line - load(toolchain) in following if you get above error
 ```
 sudo vi /usr/lib64/qt5/mkspecs/features/default_pre.prf
 ```
+
+To generate sources run 
+```dcomp/client/qt/generate.sh```
