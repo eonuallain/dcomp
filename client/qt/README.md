@@ -23,3 +23,15 @@ sudo vi /usr/lib64/qt5/mkspecs/features/default_pre.prf
 
 To generate sources run 
 ```dcomp/client/qt/generate.sh```
+
+Execute the python program with
+```python dcomp/client/qt/generated/dcomp-qt.py```
+
+Results in
+
+```
+qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+
+Available platform plugins are: eglfs, linuxfb, minimal, minimalegl, offscreen, vnc, wayland-egl, wayland, wayland-xcomposite-egl, wayland-xcomposite-glx, webgl, xcb.
+```
