@@ -8,7 +8,7 @@ USE dcomp;
 CREATE TABLE IF NOT EXISTS `task_encryption` (
   `id` int(11) NOT NULL,
   `text_unencrytped` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `text_encrytped` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `text_encrytped` text CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `processed` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
