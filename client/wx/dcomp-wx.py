@@ -12,6 +12,7 @@ class TaskPanel(wx.Panel):
             self, size=(-1, 100), 
             style=wx.LC_REPORT | wx.BORDER_SUNKEN
         )
+
         self.list_ctrl.InsertColumn(0, 'Task', width=140)
         self.list_ctrl.InsertColumn(1, 'Description', width=300)
         main_sizer.Add(self.list_ctrl, 0, wx.ALL | wx.EXPAND, 5)        
@@ -22,6 +23,7 @@ class TaskPanel(wx.Panel):
 
     def on_click(self, event):
         print(event)
+        self.list_ctrl.DeleteAllItems()
 
         with urllib.request.urlopen("http://localhost:5000/tasks") as url:
             data = json.loads(url.read().decode())
@@ -29,8 +31,6 @@ class TaskPanel(wx.Panel):
 
         index = 0
         for name, desc in data.items():
-        	print(name)
-        	print(desc)
         	self.list_ctrl.InsertItem(index, name)
         	self.list_ctrl.SetItem(index, 1, desc)
         	index = index + 1
