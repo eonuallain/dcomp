@@ -5,6 +5,12 @@ CREATE DATABASE IF NOT EXISTS `dcomp`;
 
 USE dcomp;
 
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `id` int(11) NOT NULL,
+  `task_name` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `task_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `task_encryption` (
   `id` int(11) NOT NULL,
   `text_unencrytped` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -17,4 +23,8 @@ ALTER TABLE `task_encryption`
   ADD KEY `idx_process` (`processed`);
 
 ALTER TABLE `task_encryption`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `tasks`
+  ADD PRIMARY KEY (`id`),
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
