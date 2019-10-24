@@ -26,22 +26,27 @@ class TaskPanel(wx.Panel):
         print(event)
         self.list_ctrl.DeleteAllItems()
 
-        with urllib.request.urlopen("http://localhost:5000/tasks") as url:
-            data = json.loads(url.read().decode())
-            print(data)
+        try:
+            with urllib.request.urlopen("http://localhost:5000/tasks") as url:
+                data = json.loads(url.read().decode())
+                print(data)
 
-        index = 0
-        for name, desc in data.items():
-        	self.list_ctrl.InsertItem(index, name)
-        	self.list_ctrl.SetItem(index, 1, desc)
-        	index = index + 1
+                index = 0
+                for name, desc in data.items():
+                	self.list_ctrl.InsertItem(index, name)
+                	self.list_ctrl.SetItem(index, 1, desc)
+                	index = index + 1
+        except urllib.error.HTTPError as e:
+            wx.MessageBox(str(e.code), 'Error', wx.OK | wx.ICON_ERROR)
+        except urllib.error.URLError as e:
+            wx.MessageBox(str(e.reason), 'Error', wx.OK | wx.ICON_ERROR)
 
 class DCompFrame(wx.Frame):    
     def __init__(self):
         super().__init__(parent=None,
                          title='dcomp')
         self.panel = TaskPanel(self)
-        self.SetMinSize(600,400)
+        self.SetMinSize((600,400))
         self.Center()
         self.Show()
 
