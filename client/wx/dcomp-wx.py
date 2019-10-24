@@ -45,4 +45,6 @@ class DCompFrame(wx.Frame):
 if __name__ == '__main__':
     app = wx.App(False)
     frame = DCompFrame()
+    #icon from http://icons8.com/
+    frame.SetIcon(wx.Icon("Sirubico-Black-Metal-PC.ico"))    
     app.MainLoop()
