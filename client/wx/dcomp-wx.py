@@ -15,10 +15,11 @@ class TaskPanel(wx.Panel):
 
         self.list_ctrl.InsertColumn(0, 'Task', width=140)
         self.list_ctrl.InsertColumn(1, 'Description', width=300)
-        main_sizer.Add(self.list_ctrl, 0, wx.ALL | wx.EXPAND, 5)        
+        main_sizer.Add(self.list_ctrl, 1, wx.ALL | wx.EXPAND, 5)        
         task_button = wx.Button(self, label='Load Tasks')
         task_button.Bind(wx.EVT_BUTTON, self.on_click)
-        main_sizer.Add(task_button, 0, wx.ALL | wx.CENTER, 5)        
+        main_sizer.Add(task_button, 0, wx.BOTTOM | wx.CENTER, 5)
+
         self.SetSizer(main_sizer)
 
     def on_click(self, event):
@@ -40,11 +41,13 @@ class DCompFrame(wx.Frame):
         super().__init__(parent=None,
                          title='dcomp')
         self.panel = TaskPanel(self)
+        
+        self.Center()
         self.Show()
 
 if __name__ == '__main__':
     app = wx.App(False)
     frame = DCompFrame()
     #icon from http://icons8.com/
-    frame.SetIcon(wx.Icon("Sirubico-Black-Metal-PC.ico"))    
+    frame.SetIcon(wx.Icon("Sirubico-Black-Metal-PC.ico"))
     app.MainLoop()
