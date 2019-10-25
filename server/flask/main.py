@@ -42,16 +42,23 @@ def tasks():
 @app.route("/task/encryption/next")
 def get_next_task_payload():
 	log.debug("route /tasks/encryption/next")
-	sql = "select text_unencrytped from task_encryption where processed=0 order by rand() limit 1"
+	sql = "select id, text_unencrytped from task_encryption where processed=0 order by rand() limit 1"
 	cursor.execute(sql)
 	records = cursor.fetchall()
 	log.debug("records -> {}".format(records))
 
-	text_entry = ""
-	for row in records:
-		text_entry = row['text_unencrytped']
+	text = ""
+	pk = 0
 
-	return text_entry
+	for row in records:
+		text = row['text_unencrytped']
+		pk = row['id']
+
+	payload = dict()
+	payload['id'] = pk
+	payload['text'] = text
+
+	return jsonify(payload)
 
 if __name__ == "__main__":
 	app.run()
