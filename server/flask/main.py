@@ -39,9 +39,19 @@ def tasks():
 	return jsonify(tasks)
 
 
-@app.route('/tasks/encryption/next')
+@app.route("/task/encryption/next")
 def get_next_task_payload():
 	log.debug("route /tasks/encryption/next")
+	sql = "select text_unencrytped from task_encryption where processed=0 order by rand() limit 1"
+	cursor.execute(sql)
+	records = cursor.fetchall()
+	log.debug("records -> {}".format(records))
+
+	text_entry = ""
+	for row in records:
+		text_entry = row['text_unencrytped']
+
+	return text_entry
 
 if __name__ == "__main__":
 	app.run()
