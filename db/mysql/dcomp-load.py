@@ -6,7 +6,7 @@ sql_tasks = "insert into tasks (task_name, task_description) values (%s, %s)"
 db = mysql.connector.connect(
   host="localhost",
   user="root",
-  passwd="",
+  passwd="admin",
   database="dcomp"
 )
 
@@ -25,7 +25,9 @@ for line in file:
 print("inserted {} lines".format(count))
 
 cursor.execute(sql_tasks, ("Encryption task", "A dummy encryption method using ROT13"))
-cursor.execute(sql_tasks, ("Cohen-Sutherland", "Cohen-Sutherland algorithm"))
-
 db.commit()
+
+cursor.execute(sql_tasks, ("Cohen-Sutherland", "Cohen-Sutherland algorithm"))
+db.commit()
+
 db.close()

@@ -46,7 +46,7 @@ class DCompFrame(wx.Frame):
         super().__init__(parent=None,
                          title='dcomp')
         self.panel = TaskPanel(self)
-        self.SetMinSize((600,400))
+        self.SetMinSize((500,250))
         self.Center()
         self.Show()
 
