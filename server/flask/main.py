@@ -6,14 +6,22 @@ import mysql.connector
 import yaml
 
 
-with open('log.yaml', 'r') as f:
+with open('./config/log.yaml', 'r') as f:
     config = yaml.safe_load(f.read())
     logging.config.dictConfig(config)
 
 app = Flask(__name__)
+app.config.from_envvar('APP_CONFIG_FILE')
+
 log = logging.getLogger(__name__)
 
-conn = mysql.connector.connect(host="localhost", user="root", passwd="admin", database="dcomp")
+conn = mysql.connector.connect(
+	host=app.config["DB_HOST"], 
+	user=app.config["DB_USER"], 
+	passwd=app.config["DB_PASSWORD"],
+	database=app.config["DB_SCHEMA"]
+)
+
 log.info("connect to mysql {}".format(conn))
 cursor = conn.cursor(dictionary=True)
 
@@ -61,4 +69,7 @@ def get_next_task_payload():
 	return jsonify(payload)
 
 if __name__ == "__main__":
-	app.run()
+	app.run(
+		host=app.config["FLASK_HOST"],
+		debug=app.config["FLASK_DEBUG"]
+	)

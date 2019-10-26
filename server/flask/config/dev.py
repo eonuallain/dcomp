@@ -1,0 +1,7 @@
+DB_HOST='127.0.0.1'
+DB_SCHEMA='dcomp'
+DB_USER='root'
+DB_PASSWORD='admin'
+
+FLASK_HOST='0.0.0.0'
+FLASK_DEBUG=True
