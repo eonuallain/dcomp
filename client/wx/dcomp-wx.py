@@ -51,7 +51,6 @@ class TaskPanel(wx.Panel):
             task = str(self.row_obj_dict[index])
             self.start_task(task)
 
-
     def on_load_tasks_click(self, event):
         try:
             with urllib.request.urlopen("http://localhost:5000/tasks") as url:
