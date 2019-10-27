@@ -44,7 +44,7 @@ class TaskPanel(wx.Panel):
                 	self.list_ctrl.InsertItem(index, name)
                 	self.list_ctrl.SetItem(index, 1, desc)
                 	index = index + 1
-            pub.sendMessage(('change_statusbar'), "Connected")
+            pub.sendMessage(('change_statusbar_main'), "Connected")
         except urllib.error.HTTPError as e:
             wx.MessageBox(str(e.code), 'Error', wx.OK | wx.ICON_ERROR)
         except urllib.error.URLError as e:
@@ -55,16 +55,21 @@ class DCompFrame(wx.Frame):
         super().__init__(parent=None,
                          title='dcomp')
         self.panel = TaskPanel(self)
-        self.statusbar = self.CreateStatusBar(1)
-        pub.subscribe(self.change_statusbar, 'change_statusbar')
-        pub.sendMessage(('change_statusbar'), "Not Connected")
+        self.statusbar = self.CreateStatusBar(2)
+        pub.subscribe(self.change_statusbar_main, 'change_statusbar_main')
+        pub.subscribe(self.change_statusbar_task_count, 'change_statusbar_task_count')
+        pub.sendMessage(('change_statusbar_main'), "Not Connected")
+        pub.sendMessage(('change_statusbar_task_count'), "0")
+
         self.SetMinSize((500,250))
         self.Center()
         self.Show()
 
-    def change_statusbar(self, msg):
-        print(str(msg))
+    def change_statusbar_main(self, msg):
         self.SetStatusText(msg.data)
+
+    def change_statusbar_task_count(self, msg):
+        self.SetStatusText(msg.data, 1)
 
 if __name__ == '__main__':
     app = wx.App(False)
