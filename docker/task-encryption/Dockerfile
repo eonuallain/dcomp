@@ -1,5 +1,5 @@
 from python:3.8.0-slim-buster
 
-ADD main.py /
+COPY task_base.py task_enc.py main.py main.sh /
 
-CMD [ "python", "./main.py" ]
+CMD [ "python", "./main.sh" ]

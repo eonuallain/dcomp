@@ -24,4 +24,6 @@ if __name__ == '__main__':
 
 	print("running task {}".format(choice))
 	print("running {}".format(tasks[choice]))
-	tasks[choice].run()
+	
+	url_enc = "http://localhost:5000/task/encryption/next"
+	tasks[choice].run(url_enc)
