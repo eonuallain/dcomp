@@ -3,7 +3,7 @@
 cp ../../client/console/task_base.py .
 cp ../../client/console/task_enc.py .
 
-TAG=v20191030_1
+TAG=v20191030_3
 REPO=docker.io
 BASE=eonuallain/dcomp-task-enc
 FULL=$REPO/$BASE

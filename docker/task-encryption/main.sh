@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-if [[ $# -eq 0 ]] ; then
+if [ "$#" -eq 0 ]; then
     echo 'Missing server URL argument, exiting'
     exit 1
 fi
